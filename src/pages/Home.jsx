@@ -6,6 +6,7 @@ import api from '../services/api';
 function Home() {
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState(''); // Guarda o que o usúario digitou na parte da busca
 
   useEffect(() => {
     async function fetchCountries() {
@@ -25,21 +26,30 @@ function Home() {
     fetchCountries();
   }, []);
 
+  const filteredCountries = countries.filter((country) =>
+  country.name?.common?.toLowerCase().includes(searchTerm.toLowerCase()) //vAI percorrer a lista e verificar se o que foi digitado contém em países, também vai evitar problemas com letras minusculas e maiusculas.
+);
+
   return (
     <div>
       <Header />
 
       <main>
         <section>
-          <h2>Lista de Países</h2>
-          <p>Busca, filtro e paginação virão aqui.</p>
-        </section>
+  <h2>Lista de Países</h2>
+  <input
+    type="text"
+    placeholder="Buscar país pelo nome"
+    value={searchTerm}
+    onChange={(event) => setSearchTerm(event.target.value)} // Atualiza o state a cada digitação e conecta o input ao state
+  />
+</section>
 
         {loading ? (
           <p>Carregando países...</p>
         ) : (
           <section>
-  {countries.slice(0, 6).map((country) => (
+  {filteredCountries.slice(0, 6).map((country) => (
     <CountryCard
       key={country.cca3}
       code={country.cca3}
