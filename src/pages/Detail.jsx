@@ -19,10 +19,10 @@ function Detail() {
       </section>
 
       <section>
-        <InfoBlock />
-        <InfoBlock />
-        <InfoBlock />
-        <InfoBlock />
+        <InfoBlock title="Capital" value="Brasília" />
+        <InfoBlock title="Continente" value="Américas" />
+        <InfoBlock title="População" value="203.062.512" />
+        <InfoBlock title="Código" value="BRA" />
       </section>
 
       <section>

@@ -1,7 +1,8 @@
-function InfoBlock() {
+function InfoBlock({ title, value }) {
   return (
     <div>
-      <p>Informação</p>
+      <h3>{title}</h3>
+      <p>{value}</p>
     </div>
   );
 }
