@@ -1,38 +1,85 @@
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import InfoBlock from '../components/InfoBlock';
+import api from '../services/api';
 
 function Detail() {
+  const { code } = useParams();
+  const [country, setCountry] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCountry() {
+      try {
+        const response = await api.get(`/alpha/${code}`);
+        setCountry(response.data[0]);
+      } catch (error) {
+        console.error('Erro ao buscar detalhes do país:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCountry();
+  }, [code]);
+
+  if (loading) {
+    return <p>Carregando detalhes...</p>;
+  }
+
+  if (!country) {
+    return <p>País não encontrado.</p>;
+  }
+
   return (
     <div>
       <h1>Detalhes do País</h1>
 
       <section>
         <img
-          src="https://flagcdn.com/w320/br.png"
-          alt="Bandeira do país"
+          src={country.flags?.png}
+          alt={`Bandeira de ${country.name?.common}`}
           width="250"
         />
       </section>
 
       <section>
-        <h2>Brasil</h2>
-        <p>República Federativa do Brasil</p>
+        <h2>{country.name?.common}</h2>
+        <p>{country.name?.official}</p>
       </section>
 
       <section>
-        <InfoBlock title="Capital" value="Brasília" />
-        <InfoBlock title="Continente" value="Américas" />
-        <InfoBlock title="População" value="203.062.512" />
-        <InfoBlock title="Código" value="BRA" />
+        <InfoBlock title="Capital" value={country.capital?.[0] || 'Sem capital'} />
+        <InfoBlock title="Continente" value={country.region || 'Não informado'} />
+        <InfoBlock title="Sub-região" value={country.subregion || 'Não informada'} />
+        <InfoBlock title="Área" value={`${country.area?.toLocaleString('pt-BR')} km²`} />
+        <InfoBlock
+          title="População"
+          value={country.population?.toLocaleString('pt-BR')}
+        />
+        <InfoBlock
+          title="Idiomas"
+          value={
+            country.languages
+              ? Object.values(country.languages).join(', ')
+              : 'Não informado'
+          }
+        />
+        <InfoBlock
+          title="Código"
+          value={country.cca3 || 'Não informado'}
+        />
       </section>
 
       <section>
         <h3>Sobre o país</h3>
         <p>
-          Aqui ficará uma descrição estática ou mockada sobre o país.
+          {country.name?.common} é um país muito interessante, com características
+          culturais, geográficas e históricas próprias.
         </p>
       </section>
 
-      <button>Voltar para a lista</button>
+      <Link to="/">Voltar para a lista</Link>
     </div>
   );
 }
