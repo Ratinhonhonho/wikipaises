@@ -5,8 +5,9 @@ import api from '../services/api';
 
 function Home() {
   const [countries, setCountries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(''); // Guarda o que o usúario digitou na parte da busca
+  const [loading,setLoading] = useState(true);
+  const [searchTerm,setSearchTerm] = useState(''); // Guarda o que o usúario digitou na parte da busca
+  const [selectedRegion, setSelectedRegion] = useState(''); // GUarda o continente escolhido
 
   useEffect(() => {
     async function fetchCountries() {
@@ -26,9 +27,17 @@ function Home() {
     fetchCountries();
   }, []);
 
-  const filteredCountries = countries.filter((country) =>
-  country.name?.common?.toLowerCase().includes(searchTerm.toLowerCase()) //vAI percorrer a lista e verificar se o que foi digitado contém em países, também vai evitar problemas com letras minusculas e maiusculas.
-);
+  const filteredCountries = countries.filter((country) => {
+  const matchesName = country.name?.common // Verifica se o nome da match
+    ?.toLowerCase()
+    .includes(searchTerm.toLowerCase());
+
+  const matchesRegion = selectedRegion // Verifica se o continenete da match
+    ? country.region === selectedRegion
+    : true;
+
+  return matchesName && matchesRegion; // Aplicação dos dois filtros juntos 
+});
 
   return (
     <div>
@@ -37,19 +46,32 @@ function Home() {
       <main>
         <section>
   <h2>Lista de Países</h2>
+
   <input
     type="text"
     placeholder="Buscar país pelo nome"
     value={searchTerm}
-    onChange={(event) => setSearchTerm(event.target.value)} // Atualiza o state a cada digitação e conecta o input ao state
+    onChange={(event) => setSearchTerm(event.target.value)}
   />
+
+  <select // Seleciona or continenete 
+    value={selectedRegion}
+    onChange={(event) => setSelectedRegion(event.target.value)} // COnectam os campos ao State
+  >
+    <option value="">Todos os continentes</option>
+    <option value="Americas">Americas</option>
+    <option value="Europe">Europe</option>
+    <option value="Asia">Asia</option>
+    <option value="Africa">Africa</option>
+    <option value="Oceania">Oceania</option>
+  </select>
 </section>
 
         {loading ? (
           <p>Carregando países...</p>
         ) : (
           <section>
-  {filteredCountries.slice(0, 6).map((country) => (
+  {filteredCountries.slice(0, 10).map((country) => (
     <CountryCard
       key={country.cca3}
       code={country.cca3}
