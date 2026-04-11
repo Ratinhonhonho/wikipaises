@@ -39,17 +39,18 @@ function Home() {
           <p>Carregando países...</p>
         ) : (
           <section>
-            {countries.slice(0, 6).map((country) => (
-                <CountryCard
-                    key={country.cca3}
-                    flag={country.flags?.png}
-                    name={country.name?.common}
-                    capital={country.capital?.[0] || 'Sem capital'}
-                    region={country.region}
-                    population={country.population?.toLocaleString('pt-BR')}
-                />
-            ))}
-        </section>
+  {countries.slice(0, 6).map((country) => (
+    <CountryCard
+      key={country.cca3}
+      code={country.cca3}
+      flag={country.flags?.png}
+      name={country.name?.common}
+      capital={country.capital?.[0] || 'Sem capital'}
+      region={country.region}
+      population={country.population?.toLocaleString('pt-BR')}
+    />
+  ))}
+</section>
         )}
       </main>
     </div>
