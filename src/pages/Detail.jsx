@@ -7,6 +7,8 @@ function Detail() {
   const { code } = useParams();
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
+  const currencyCode = country?.currencies ? Object.keys(country.currencies)[0] : null;
+  const currencyData = currencyCode ? country.currencies[currencyCode] : null;
 
   useEffect(() => {
     async function fetchCountry() {
@@ -52,7 +54,7 @@ function Detail() {
         <InfoBlock title="Capital" value={country.capital?.[0] || 'Sem capital'} />
         <InfoBlock title="Continente" value={country.region || 'Não informado'} />
         <InfoBlock title="Sub-região" value={country.subregion || 'Não informada'} />
-        <InfoBlock title="Área" value={`${country.area?.toLocaleString('pt-BR')} km²`} />
+        value={country.area ? `${country.area.toLocaleString('pt-BR')} km²` : 'Não informado'}
         <InfoBlock
           title="População"
           value={country.population?.toLocaleString('pt-BR')}
@@ -69,6 +71,14 @@ function Detail() {
           title="Código"
           value={country.cca3 || 'Não informado'}
         />
+        <InfoBlock
+  title="Moeda"
+  value={
+    currencyData
+      ? `${currencyData.name} (${currencyCode}) ${currencyData.symbol || ''}`
+      : 'Não informado'
+  }
+/>
       </section>
 
       <section>
