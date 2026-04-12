@@ -2,6 +2,23 @@ import { Link } from 'react-router-dom';
 import styles from './CountryCard.module.css';
 
 function CountryCard({ code, flag, name, capital, region, population }) {
+  function getRegionClass(regionName) {
+    switch (regionName) {
+      case 'Americas':
+        return styles.americas;
+      case 'Europe':
+        return styles.europe;
+      case 'Asia':
+        return styles.asia;
+      case 'Africa':
+        return styles.africa;
+      case 'Oceania':
+        return styles.oceania;
+      default:
+        return styles.defaultRegion;
+    }
+  }
+
   return (
     <Link to={`/country/${code}`} className={styles.cardLink}>
       <article className={styles.card}>
@@ -17,7 +34,9 @@ function CountryCard({ code, flag, name, capital, region, population }) {
           <p className={styles.info}>População: {population}</p>
         </div>
 
-        <span className={styles.regionBadge}>{region}</span>
+        <span className={`${styles.regionBadge} ${getRegionClass(region)}`}>
+          {region}
+        </span>
       </article>
     </Link>
   );

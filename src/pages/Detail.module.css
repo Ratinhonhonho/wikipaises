@@ -1,0 +1,91 @@
+.page {
+  min-height: 100vh;
+  background: #f1f5f9;
+  color: #0f172a;
+  padding: 40px 24px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 24px;
+  text-decoration: none;
+  color: white;
+  background: #0f172a;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.flag {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 16px;
+  border: 1px solid #0f172a;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+}
+
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.aboutSection {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+.aboutTitle {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.aboutText {
+  color: #475569;
+  line-height: 1.7;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 40px 0;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .flag {
+    max-width: 100%;
+  }
+}
