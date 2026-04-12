@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CountryCard from '../components/CountryCard';
 import api from '../services/api';
+import styles from './Home.module.css';
 
 function Home() {
   const [countries, setCountries] = useState([]);
@@ -52,38 +53,42 @@ function Home() {
   const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div className={styles.page}>
       <Header />
 
-      <main>
-        <section>
-          <h2>Lista de Países</h2>
+      <main className={styles.container}>
+        <div className={styles.contentArea}>
+          <section className={styles.topSection}>
+            <h2 className={styles.title}>Lista de Países</h2>
 
-          <input
-            type="text"
-            placeholder="Buscar país pelo nome"
-            value={searchTerm}
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
+            <div className={styles.controls}>
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Buscar país pelo nome"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
 
-          <select
-            value={selectedRegion}
-            onChange={(event) => setSelectedRegion(event.target.value)}
-          >
-            <option value="">Todos os continentes</option>
-            <option value="Americas">Americas</option>
-            <option value="Europe">Europe</option>
-            <option value="Asia">Asia</option>
-            <option value="Africa">Africa</option>
-            <option value="Oceania">Oceania</option>
-          </select>
-        </section>
+              <select
+                className={styles.select}
+                value={selectedRegion}
+                onChange={(event) => setSelectedRegion(event.target.value)}
+              >
+                <option value="">Todos os continentes</option>
+                <option value="Americas">Americas</option>
+                <option value="Europe">Europe</option>
+                <option value="Asia">Asia</option>
+                <option value="Africa">Africa</option>
+                <option value="Oceania">Oceania</option>
+              </select>
+            </div>
+          </section>
 
-        {loading ? (
-          <p>Carregando países...</p>
-        ) : (
-          <>
-            <section>
+          {loading ? (
+            <p className={styles.message}>Carregando países...</p>
+          ) : (
+            <section className={styles.grid}>
               {paginatedCountries.map((country) => (
                 <CountryCard
                   key={country.cca3}
@@ -96,27 +101,31 @@ function Home() {
                 />
               ))}
             </section>
+          )}
+        </div>
 
-            <div>
-              <button
-                onClick={() => setCurrentPage((prev) => prev - 1)}
-                disabled={currentPage === 1}
-              >
-                Anterior
-              </button>
+        {!loading && (
+          <div className={styles.pagination}>
+            <button
+              className={styles.button}
+              onClick={() => setCurrentPage((prev) => prev - 1)}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
 
-              <span>
-                Página {currentPage} de {totalPages || 1}
-              </span>
+            <span>
+              Página {currentPage} de {totalPages || 1}
+            </span>
 
-              <button
-                onClick={() => setCurrentPage((prev) => prev + 1)}
-                disabled={currentPage === totalPages || totalPages === 0}
-              >
-                Próximo
-              </button>
-            </div>
-          </>
+            <button
+              className={styles.button}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              disabled={currentPage === totalPages || totalPages === 0}
+            >
+              Próximo
+            </button>
+          </div>
         )}
       </main>
     </div>

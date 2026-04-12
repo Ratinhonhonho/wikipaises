@@ -1,0 +1,93 @@
+.page {
+  min-height: 100vh;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.topSection {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.input {
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  min-width: 260px;
+  font-size: 1rem;
+}
+
+.select {
+  padding: 12px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: white;
+  color: #0f172a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 220px));
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  height: 760px;
+  align-content: start;
+  overflow: hidden;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding-top: 24px;
+}
+
+.button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #0f172a;
+  color: white;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.1rem;
+}
