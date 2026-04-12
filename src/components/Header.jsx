@@ -1,9 +1,11 @@
+import styles from './Header.module.css';
+
 function Header() {
-    return(
-        <header>
-            <h1>WikiPaíses</h1>
-        </header>
-    );
+  return (
+    <header className={styles.header}>
+      <h1 className={styles.title}>WikiPaíses</h1>
+    </header>
+  );
 }
 
 export default Header;
