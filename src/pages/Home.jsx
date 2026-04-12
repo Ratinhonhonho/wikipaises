@@ -5,9 +5,12 @@ import api from '../services/api';
 
 function Home() {
   const [countries, setCountries] = useState([]);
-  const [loading,setLoading] = useState(true);
-  const [searchTerm,setSearchTerm] = useState(''); // Guarda o que o usúario digitou na parte da busca
-  const [selectedRegion, setSelectedRegion] = useState(''); // GUarda o continente escolhido
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const countriesPerPage = 12;
 
   useEffect(() => {
     async function fetchCountries() {
@@ -27,17 +30,26 @@ function Home() {
     fetchCountries();
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedRegion]);
+
   const filteredCountries = countries.filter((country) => {
-  const matchesName = country.name?.common // Verifica se o nome da match
-    ?.toLowerCase()
-    .includes(searchTerm.toLowerCase());
+    const matchesName = country.name?.common
+      ?.toLowerCase()
+      .includes(searchTerm.toLowerCase());
 
-  const matchesRegion = selectedRegion // Verifica se o continenete da match
-    ? country.region === selectedRegion
-    : true;
+    const matchesRegion = selectedRegion
+      ? country.region === selectedRegion
+      : true;
 
-  return matchesName && matchesRegion; // Aplicação dos dois filtros juntos 
-});
+    return matchesName && matchesRegion;
+  });
+
+  const totalPages = Math.ceil(filteredCountries.length / countriesPerPage);
+  const startIndex = (currentPage - 1) * countriesPerPage;
+  const endIndex = startIndex + countriesPerPage;
+  const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
 
   return (
     <div>
@@ -45,44 +57,66 @@ function Home() {
 
       <main>
         <section>
-  <h2>Lista de Países</h2>
+          <h2>Lista de Países</h2>
 
-  <input
-    type="text"
-    placeholder="Buscar país pelo nome"
-    value={searchTerm}
-    onChange={(event) => setSearchTerm(event.target.value)}
-  />
+          <input
+            type="text"
+            placeholder="Buscar país pelo nome"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
 
-  <select // Seleciona or continenete 
-    value={selectedRegion}
-    onChange={(event) => setSelectedRegion(event.target.value)} // COnectam os campos ao State
-  >
-    <option value="">Todos os continentes</option>
-    <option value="Americas">Americas</option>
-    <option value="Europe">Europe</option>
-    <option value="Asia">Asia</option>
-    <option value="Africa">Africa</option>
-    <option value="Oceania">Oceania</option>
-  </select>
-</section>
+          <select
+            value={selectedRegion}
+            onChange={(event) => setSelectedRegion(event.target.value)}
+          >
+            <option value="">Todos os continentes</option>
+            <option value="Americas">Americas</option>
+            <option value="Europe">Europe</option>
+            <option value="Asia">Asia</option>
+            <option value="Africa">Africa</option>
+            <option value="Oceania">Oceania</option>
+          </select>
+        </section>
 
         {loading ? (
           <p>Carregando países...</p>
         ) : (
-          <section>
-  {filteredCountries.slice(0, 10).map((country) => (
-    <CountryCard
-      key={country.cca3}
-      code={country.cca3}
-      flag={country.flags?.png}
-      name={country.name?.common}
-      capital={country.capital?.[0] || 'Sem capital'}
-      region={country.region}
-      population={country.population?.toLocaleString('pt-BR')}
-    />
-  ))}
-</section>
+          <>
+            <section>
+              {paginatedCountries.map((country) => (
+                <CountryCard
+                  key={country.cca3}
+                  code={country.cca3}
+                  flag={country.flags?.png}
+                  name={country.name?.common}
+                  capital={country.capital?.[0] || 'Sem capital'}
+                  region={country.region}
+                  population={country.population?.toLocaleString('pt-BR')}
+                />
+              ))}
+            </section>
+
+            <div>
+              <button
+                onClick={() => setCurrentPage((prev) => prev - 1)}
+                disabled={currentPage === 1}
+              >
+                Anterior
+              </button>
+
+              <span>
+                Página {currentPage} de {totalPages || 1}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+                disabled={currentPage === totalPages || totalPages === 0}
+              >
+                Próximo
+              </button>
+            </div>
+          </>
         )}
       </main>
     </div>
