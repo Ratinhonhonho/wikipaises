@@ -23,10 +23,13 @@ function CountryCard({ code, flag, name, capital, region, population }) {
     <Link to={`/country/${code}`} className={styles.cardLink}>
       <article className={styles.card}>
         <img
-          src={flag}
-          alt={`Bandeira de ${name}`}
-          className={styles.flag}
-        />
+  src={flag}
+  alt={`Bandeira de ${name}`}
+  className={styles.flag}
+  onError={(event) => {
+    event.currentTarget.src = 'https://via.placeholder.com/320x200?text=Sem+bandeira';
+  }}
+/>
 
         <div className={styles.cardContent}>
           <h2 className={styles.name}>{name}</h2>

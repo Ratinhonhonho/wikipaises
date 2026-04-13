@@ -97,7 +97,7 @@ const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
                 <CountryCard
                   key={country.cca3}
                   code={country.cca3}
-                  flag={country.flags?.png}
+                  flag={country.flags?.svg || country.flags?.png}
                   name={country.name?.common}
                   capital={country.capital?.[0] || 'Sem capital'}
                   region={country.region}

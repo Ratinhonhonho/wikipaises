@@ -44,10 +44,10 @@ function Detail() {
 
         <section className={styles.hero}>
           <img
-            src={country.flags?.png}
+            src={country.flags?.svg || country.flags?.png}
             alt={`Bandeira de ${country.name?.common}`}
             className={styles.flag}
-          />
+        />
 
           <div>
             <h1 className={styles.title}>{country.name?.common}</h1>
