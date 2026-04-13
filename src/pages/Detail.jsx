@@ -3,6 +3,16 @@ import { useParams, Link } from 'react-router-dom';
 import InfoBlock from '../components/InfoBlock';
 import api from '../services/api';
 import styles from './Detail.module.css';
+import {
+  Landmark,
+Globe,
+  MapPinned,
+  Ruler,
+  Users,
+  Languages,
+  Banknote,
+  BadgeInfo,
+} from 'lucide-react';
 
 function Detail() {
   const { code } = useParams();
@@ -56,34 +66,85 @@ function Detail() {
         </section>
 
         <section className={styles.infoGrid}>
-          <InfoBlock title="Capital" value={country.capital?.[0] || 'Sem capital'} />
-          <InfoBlock title="Continente" value={country.region || 'Não informado'} />
-          <InfoBlock title="Sub-região" value={country.subregion || 'Não informada'} />
-          <InfoBlock
-            title="Área"
-            value={country.area ? `${country.area.toLocaleString('pt-BR')} km²` : 'Não informado'}
-          />
-          <InfoBlock
-            title="População"
-            value={country.population?.toLocaleString('pt-BR') || 'Não informado'}
-          />
-          <InfoBlock
-            title="Idiomas"
-            value={
-              country.languages
-                ? Object.values(country.languages).join(', ')
-                : 'Não informado'
-            }
-          />
-          <InfoBlock
-            title="Moeda"
-            value={
-              currencyData
-                ? `${currencyData.name} (${currencyCode}) ${currencyData.symbol || ''}`
-                : 'Não informado'
-            }
-          />
-          <InfoBlock title="Código" value={country.cca3 || 'Não informado'} />
+<InfoBlock
+  title={
+    <>
+      <Landmark size={16} /> Capital
+    </>
+  }
+  value={country.capital?.[0] || 'Sem capital'}
+/>
+
+<InfoBlock
+  title={
+    <>
+      <Globe size={16} /> Continente
+    </>
+  }
+  value={country.region || 'Não informado'}
+/>
+
+<InfoBlock
+  title={
+    <>
+      <MapPinned size={16} /> Sub-região
+    </>
+  }
+  value={country.subregion || 'Não informada'}
+/>
+
+<InfoBlock
+  title={
+    <>
+      <Ruler size={16} /> Área
+    </>
+  }
+  value={country.area ? `${country.area.toLocaleString('pt-BR')} km²` : 'Não informado'}
+/>
+
+<InfoBlock
+  title={
+    <>
+      <Users size={16} /> População
+    </>
+  }
+  value={country.population?.toLocaleString('pt-BR') || 'Não informado'}
+/>
+
+<InfoBlock
+  title={
+    <>
+      <Languages size={16} /> Idiomas
+    </>
+  }
+  value={
+    country.languages
+      ? Object.values(country.languages).join(', ')
+      : 'Não informado'
+  }
+/>
+
+<InfoBlock
+  title={
+    <>
+      <Banknote size={16} /> Moeda
+    </>
+  }
+  value={
+    currencyData
+      ? `${currencyData.name} (${currencyCode}) ${currencyData.symbol || ''}`
+      : 'Não informado'
+  }
+/>
+
+<InfoBlock
+  title={
+    <>
+      <BadgeInfo size={16} /> Código
+    </>
+  }
+  value={country.cca3 || 'Não informado'}
+/>
         </section>
 
         <section className={styles.aboutSection}>

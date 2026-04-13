@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Landmark, Users } from 'lucide-react';
 import styles from './CountryCard.module.css';
 
 function CountryCard({ code, flag, name, capital, region, population }) {
@@ -33,8 +34,15 @@ function CountryCard({ code, flag, name, capital, region, population }) {
 
         <div className={styles.cardContent}>
           <h2 className={styles.name}>{name}</h2>
-          <p className={styles.info}>Capital: {capital}</p>
-          <p className={styles.info}>População: {population}</p>
+<p className={styles.info}>
+  <Landmark size={16} />
+  <span>{capital}</span>
+</p>
+
+<p className={styles.info}>
+  <Users size={16} />
+  <span>{population}</span>
+</p>
         </div>
 
         <span className={`${styles.regionBadge} ${getRegionClass(region)}`}>
