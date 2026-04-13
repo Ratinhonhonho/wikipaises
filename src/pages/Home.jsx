@@ -47,14 +47,14 @@ function Home() {
     return matchesName && matchesRegion;
   });
 
-const sortedCountries = [...filteredCountries].sort((a, b) =>
-  a.name?.common.localeCompare(b.name?.common)
-);
+  const sortedCountries = [...filteredCountries].sort((a, b) =>
+    a.name?.common.localeCompare(b.name?.common)
+  );
 
-const totalPages = Math.ceil(sortedCountries.length / countriesPerPage);
-const startIndex = (currentPage - 1) * countriesPerPage;
-const endIndex = startIndex + countriesPerPage;
-const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(sortedCountries.length / countriesPerPage);
+  const startIndex = (currentPage - 1) * countriesPerPage;
+  const endIndex = startIndex + countriesPerPage;
+  const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
 
   return (
     <div className={styles.page}>
@@ -93,17 +93,21 @@ const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
             <p className={styles.message}>Carregando países...</p>
           ) : (
             <section className={styles.grid}>
-              {paginatedCountries.map((country) => (
-                <CountryCard
-                  key={country.cca3}
-                  code={country.cca3}
-                  flag={country.flags?.svg || country.flags?.png}
-                  name={country.name?.common}
-                  capital={country.capital?.[0] || 'Sem capital'}
-                  region={country.region}
-                  population={country.population?.toLocaleString('pt-BR')}
-                />
-              ))}
+              {paginatedCountries.length === 0 ? (
+                <p className={styles.message}>Nenhum país encontrado.</p>
+              ) : (
+                paginatedCountries.map((country) => (
+                  <CountryCard
+                    key={country.cca3}
+                    code={country.cca3}
+                    flag={country.flags?.svg || country.flags?.png}
+                    name={country.name?.common}
+                    capital={country.capital?.[0] || 'Sem capital'}
+                    region={country.region}
+                    population={country.population?.toLocaleString('pt-BR')}
+                  />
+                ))
+              )}
             </section>
           )}
         </div>
@@ -118,7 +122,7 @@ const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
               Anterior
             </button>
 
-            <span>
+            <span className={styles.pageIndicator}>
               Página {currentPage} de {totalPages || 1}
             </span>
 
