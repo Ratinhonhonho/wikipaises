@@ -47,10 +47,14 @@ function Home() {
     return matchesName && matchesRegion;
   });
 
-  const totalPages = Math.ceil(filteredCountries.length / countriesPerPage);
-  const startIndex = (currentPage - 1) * countriesPerPage;
-  const endIndex = startIndex + countriesPerPage;
-  const paginatedCountries = filteredCountries.slice(startIndex, endIndex);
+const sortedCountries = [...filteredCountries].sort((a, b) =>
+  a.name?.common.localeCompare(b.name?.common)
+);
+
+const totalPages = Math.ceil(sortedCountries.length / countriesPerPage);
+const startIndex = (currentPage - 1) * countriesPerPage;
+const endIndex = startIndex + countriesPerPage;
+const paginatedCountries = sortedCountries.slice(startIndex, endIndex);
 
   return (
     <div className={styles.page}>
