@@ -38,7 +38,7 @@ function Home() {
   const filteredCountries = countries.filter((country) => {
     const matchesName = country.name?.common
       ?.toLowerCase()
-      .includes(searchTerm.toLowerCase());
+      .startsWith(searchTerm.toLowerCase());
 
     const matchesRegion = selectedRegion
       ? country.region === selectedRegion
