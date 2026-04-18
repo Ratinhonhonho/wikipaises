@@ -1,16 +1,81 @@
-# React + Vite
+# 🌍 WikiPaíses
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação web desenvolvida com React que consome a API REST Countries para exibir informações sobre países do mundo de forma simples, organizada e interativa.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🔗 Acesse o projeto
 
-## React Compiler
+👉 Deploy: https://SEU-LINK-VERCEL-AQUI  
+👉 Repositório: https://github.com/Ratinhonhonho/wikipaises
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Funcionalidades
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📋 Listagem de países
+- 🔎 Busca por nome
+- 🌎 Filtro por continente
+- 📄 Paginação
+- 🔗 Navegação para tela de detalhes
+- 📊 Exibição de informações completas do país
+- 📱 Interface responsiva
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- React
+- Vite
+- React Router DOM
+- Axios
+- CSS Modules
+- Lucide React (ícones)
+
+---
+
+## 📂 Estrutura do projeto
+
+```
+src/
+├── components/
+├── pages/
+├── services/
+└── assets/
+```
+
+---
+
+## ⚙️ Como executar localmente
+
+```bash
+# Clonar o repositório
+git clone https://github.com/Ratinhonhonho/wikipaises.git
+
+# Entrar na pasta
+cd wikipaises
+
+# Instalar dependências
+npm install
+
+# Rodar o projeto
+npm run dev
+```
+
+---
+
+## 🤖 Uso de Inteligência Artificial
+
+A Inteligência Artificial foi utilizada como ferramenta de apoio durante o desenvolvimento do projeto, auxiliando principalmente em:
+
+- Ajustes de estilização com CSS
+- Esclarecimento de dúvidas sobre React
+- Melhorias pontuais na interface
+
+O desenvolvimento, estruturação e implementação da aplicação foram realizados de forma autoral.
+
+---
+
+## 📌 Observações
+
+Projeto desenvolvido para fins acadêmicos, com foco no aprendizado de desenvolvimento front-end utilizando React.
