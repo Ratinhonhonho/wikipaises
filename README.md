@@ -1,12 +1,12 @@
 # 🌍 WikiPaíses
 
-Aplicação web desenvolvida com React que consome a API REST Countries para exibir informações sobre países do mundo de forma simples, organizada e interativa.
+Aplicação web desenvolvida com React que consome a API REST Countries para exibir informações sobre países do mundo de forma simples, organizada e interativa, permitindo busca, filtragem e navegação entre diferentes páginas.
 
 ---
 
 ## 🔗 Acesse o projeto
 
-👉 Deploy: https://SEU-LINK-VERCEL-AQUI  
+👉 Deploy: https://wikipaises-orcin.vercel.app/  
 👉 Repositório: https://github.com/Ratinhonhonho/wikipaises
 
 ---
