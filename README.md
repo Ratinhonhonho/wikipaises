@@ -66,13 +66,13 @@ npm run dev
 
 ## 🤖 Uso de Inteligência Artificial
 
-A Inteligência Artificial foi utilizada como ferramenta de apoio durante o desenvolvimento do projeto, auxiliando principalmente em:
+A Inteligência Artificial foi utilizada como ferramenta de apoio durante o desenvolvimento do projeto, principalmente para:
 
-- Ajustes de estilização com CSS
-- Esclarecimento de dúvidas sobre React
-- Melhorias pontuais na interface
+- esclarecimento de dúvidas conceituais sobre React (como uso de hooks, organização de componentes e consumo de APIs)
+- auxílio na estruturação da aplicação (separação em pages, components e services)
+- sugestões de melhorias na interface e experiência do usuário
 
-O desenvolvimento, estruturação e implementação da aplicação foram realizados de forma autoral.
+O desenvolvimento, implementação e decisões principais do projeto foram realizados de forma autoral, com a IA sendo utilizada apenas como suporte ao aprendizado e refinamento do código.
 
 ---
 
